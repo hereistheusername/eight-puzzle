@@ -1,6 +1,7 @@
 import unittest
 import numpy as np
 from Astar import Problem
+from Astar import Operators
 
 class AStarProblemTestCase(unittest.TestCase):
     def test_functionality(self):
@@ -15,10 +16,10 @@ class AStarProblemTestCase(unittest.TestCase):
             [7, 8, 0] ]
         )
         operators = [
-            ("Move Blank left", 1),
-            ("Move Blank right", 1),
-            ("Move Blank up", 1),
-            ("Move Blank down", 1)
+            Operators.Move_Black_left('Move Blank left', 1),
+            Operators.Move_Black_left('Move Blank right', 1),
+            Operators.Move_Black_left('Move Blank up', 1),
+            Operators.Move_Black_left('Move Blank down', 1)
         ]
 
         problem = Problem.AStarProblem(initial_state,
