@@ -16,10 +16,10 @@ class AStarProblemTestCase(unittest.TestCase):
             [7, 8, 0] ]
         )
         operators = [
-            Operators.Move_Black_left('Move Blank left', 1),
-            Operators.Move_Black_left('Move Blank right', 1),
-            Operators.Move_Black_left('Move Blank up', 1),
-            Operators.Move_Black_left('Move Blank down', 1)
+            Operators.Move_Blank_left('Move Blank left', 1),
+            Operators.Move_Blank_right('Move Blank right', 1),
+            Operators.Move_Blank_up('Move Blank up', 1),
+            Operators.Move_Blank_down('Move Blank down', 1)
         ]
 
         problem = Problem.AStarProblem(initial_state,
