@@ -23,7 +23,7 @@ class Move_Blank_left(Operator.AbstractOperator):
         if yy >= 0:
             state = np.copy(node.get_current_state())
             state[x,y], state[x,yy] = state[x,yy], state[x,y]
-            return Node.AStarNode(state)
+            return Node.AStarNode(state, self)
         else:
             return None
 
@@ -39,7 +39,7 @@ class Move_Blank_right(Move_Blank_left):
         if yy < y_size:
             state = np.copy(node.get_current_state())
             state[x,y], state[x,yy] = state[x,yy], state[x,y]
-            return Node.AStarNode(state)
+            return Node.AStarNode(state, self)
         else:
             return None
 
@@ -56,7 +56,7 @@ class Move_Blank_up(Move_Blank_left):
         if xx >= 0:
             state = np.copy(node.get_current_state())
             state[x,y], state[xx, y] = state[xx, y], state[x, y]
-            return Node.AStarNode(state)
+            return Node.AStarNode(state, self)
         else:
             return None
 
@@ -73,6 +73,6 @@ class Move_Blank_down(Move_Blank_left):
         if xx < x_size:
             state = np.copy(node.get_current_state())
             state[x,y], state[xx, y] = state[xx, y], state[x, y]
-            return Node.AStarNode(state)
+            return Node.AStarNode(state, self)
         else:
             return None
