@@ -27,6 +27,9 @@ class Move_Blank_left(Operator.AbstractOperator):
         else:
             return None
 
+    def __str__(self):
+        return self.name
+
 class Move_Blank_right(Move_Blank_left):
     def __init__(self, name, cost):
         super().__init__(name, cost)
