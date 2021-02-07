@@ -1,6 +1,10 @@
 # ctx is context, which is used to control output message when expanding node or finding the goal
-def GeneralSearchAlgorithm(problem, queue, ctx):
+def GeneralSearchAlgorithm(ctx):
+    problem = ctx.get_problem()
+    queue = ctx.get_queue_function()
+
     nodes = queue(problem.get_initial_state())
+    ctx.onInit()
 
     while True:
         if nodes.isEmpty():
