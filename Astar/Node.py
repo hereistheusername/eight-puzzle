@@ -18,7 +18,7 @@ class AStarNode(Node.AbstractNode):
         # inherit cost
         self.cumulative_cost += parent_node.cumulative_cost
         # inherit path
-        self.path += parent_node.path
+        self.path = parent_node.path + self.path
         return self
 
     # operators are moving blank to 4 directions
