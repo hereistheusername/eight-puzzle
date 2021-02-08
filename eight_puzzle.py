@@ -2,6 +2,12 @@ from pprint import pprint
 from PyInquirer import prompt, Separator
 import numpy as np
 
+import time
+import sys
+import threading
+from multiprocessing import Process
+
+
 from Astar import Problem,Operators,utils,Queue,Context,Node
 from base.GeneralSearchAlgorithm import GeneralSearchAlgorithm
 
@@ -69,6 +75,15 @@ def misplaced_distance(node):
 def manhattan_distance(node):
     return utils.manhattan_distance(node.get_current_state(), goal_state)
 
+def do_search(context):
+        start_time = time.process_time()
+        GeneralSearchAlgorithm(context)
+        end_time = time.process_time()
+        print(
+            'the sum of the system and user CPU time of the current process in seconds: ',
+            str(end_time - start_time)
+        )
+        sys.exit()
 
 if __name__ == '__main__':
     answers = prompt(questions)
@@ -98,4 +113,10 @@ if __name__ == '__main__':
     context = Context.AStarContext(problem, Queue.AStarQueue, Node.AStarNode, g, h)
 
     # do search
-    GeneralSearchAlgorithm(context)
+    search_process = threading.Thread(target=do_search, args=[context], daemon=True)
+    search_process.start()
+    time.sleep(15*60)
+    if search_process.is_alive():
+        print('run out of tim\n')
+        sys.exit()
+        

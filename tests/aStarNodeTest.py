@@ -74,4 +74,4 @@ class AStarNodeTestCase(unittest.TestCase):
         expanded_nodes = initial_state[0].expand(self.operators)
         self.assertEqual(len(expanded_nodes), 2)
         for n in expanded_nodes:
-            self.assertFalse( n.path[-1]!= self.move_left)
+            self.assertTrue( n.path[-1]!= self.move_left)
