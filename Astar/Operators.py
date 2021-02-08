@@ -15,6 +15,10 @@ class Move_Blank_left(Operator.AbstractOperator):
         return self.name
 
     def operate(self, node):
+        # prevent going back to last state
+        if len(node.path)>0 and node.path[-1].__class__.__name__ == 'Move_Blank_right':
+            return None
+
         # 0 represents blank
         blank = list(zip(*np.where( node.get_current_state() == 0)))
         x, y = blank[0]
@@ -35,6 +39,9 @@ class Move_Blank_right(Move_Blank_left):
         super().__init__(name, cost)
 
     def operate(self, node):
+        if len(node.path)>0 and node.path[-1].__class__.__name__ == 'Move_Blank_left':
+            return None
+
         blank = list(zip(*np.where( node.get_current_state() == 0)))
         x, y = blank[0]
         yy = y + 1
@@ -53,6 +60,9 @@ class Move_Blank_up(Move_Blank_left):
         super().__init__(name, cost)
     
     def operate(self, node):
+        if len(node.path)>0 and node.path[-1].__class__.__name__ == 'Move_Blank_down':
+            return None
+
         blank = list(zip(*np.where( node.get_current_state() == 0)))
         x, y = blank[0]
         xx = x - 1
@@ -69,6 +79,9 @@ class Move_Blank_down(Move_Blank_left):
         super().__init__(name, cost)
     
     def operate(self, node):
+        if len(node.path)>0 and node.path[-1].__class__.__name__ == 'Move_Blank_up':
+            return None
+
         blank = list(zip(*np.where( node.get_current_state() == 0)))
         x, y = blank[0]
         xx = x + 1

@@ -67,3 +67,11 @@ class AStarNodeTestCase(unittest.TestCase):
             self.assertTrue( (case2_expanded[i].get_current_state() == self.case2_expected[i].get_current_state()).all())
             self.assertTrue( case2_expanded[i].cumulative_cost == 1)
             self.assertTrue( case2_expanded[i].path[0] == self.operators[i])
+
+    def test_do_not_expand_previous_state(self):
+        initial_state = self.case1.expand([self.move_left] )
+        self.assertEqual(len(initial_state), 1)
+        expanded_nodes = initial_state[0].expand(self.operators)
+        self.assertEqual(len(expanded_nodes), 2)
+        for n in expanded_nodes:
+            self.assertFalse( n.path[-1]!= self.move_left)
