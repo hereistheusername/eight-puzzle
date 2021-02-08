@@ -115,8 +115,8 @@ if __name__ == '__main__':
     # do search
     search_process = threading.Thread(target=do_search, args=[context], daemon=True)
     search_process.start()
-    time.sleep(15*60)
+    search_process.join(15*60)
     if search_process.is_alive():
-        print('run out of tim\n')
+        print('run out of time\n')
         sys.exit()
         
