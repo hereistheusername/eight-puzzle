@@ -18,11 +18,19 @@ class AStarQueue(Queue.AbstractQueue):
     # nodes sort by estimate cost in ascending
     # the first node has the lowest cost
     def remove_front(self):
-        return self.nodes.pop(0)
+        minimum_front_index = 0
+        minimum_estimate_cost = self.sort_method(self.nodes[minimum_front_index])
+        for i in range(1, len(self.nodes)):
+            current_estimate_cost = self.sort_method(self.nodes[i])
+            if current_estimate_cost < minimum_estimate_cost:
+                minimum_front_index = i
+                minimum_estimate_cost = current_estimate_cost
+        
+        return self.nodes.pop(minimum_front_index)
 
     def queueing(self, expanded_nodes):
         self.nodes.extend(expanded_nodes)
-        self.sort_by_estimate_cost_to_goal()
+        # self.sort_by_estimate_cost_to_goal()
 
     # the queue can still keep FIFO order, but nodes in the queue
     # should be sorted before removing the front
