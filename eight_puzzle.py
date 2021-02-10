@@ -7,6 +7,7 @@ import sys
 import threading
 from multiprocessing import Process
 
+import cProfile, pstats
 
 from Astar import Problem,Operators,utils,Queue,Context,Node
 from base.GeneralSearchAlgorithm import GeneralSearchAlgorithm
@@ -77,8 +78,15 @@ def manhattan_distance(node):
 
 def do_search(context):
         start_time = time.process_time()
+        profiler = cProfile.Profile()
+        profiler.enable()
         GeneralSearchAlgorithm(context)
+        profiler.disable()
         end_time = time.process_time()
+        stats = pstats.Stats(profiler)
+        from datetime import datetime
+        dateTime = datetime.today().strftime('%Y-%m-%d-%H:%M:%S')
+        stats.dump_stats('stats/'+dateTime)
         print(
             'the sum of the system and user CPU time of the current process in seconds: ',
             str(end_time - start_time)
