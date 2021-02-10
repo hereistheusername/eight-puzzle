@@ -2,9 +2,11 @@ import unittest
 import numpy as np
 from Astar import Problem
 from Astar import Operators
+from Astar.Node import AStarNode
 
 class AStarProblemTestCase(unittest.TestCase):
     def test_functionality(self):
+        AStarNode.h = (lambda n: 0)
         initial_state = np.array(
             [[1, 2, 3],
             [4, 5, 6],
