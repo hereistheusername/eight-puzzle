@@ -1,7 +1,9 @@
 import numpy as np
 from base import Operator
-from Astar import Node
 
+# Though, node should know how to expand, it is less expandable if put all code in Node class.
+# it is better to put that in seperate Operator classes
+# However, that means Operators should know how to generate a node
 class Move_Blank_left(Operator.AbstractOperator):
 
     def __init__(self, name, cost):
@@ -27,7 +29,7 @@ class Move_Blank_left(Operator.AbstractOperator):
         if yy >= 0:
             state = np.copy(node.get_current_state())
             state[x,y], state[x,yy] = state[x,yy], state[x,y]
-            return Node.AStarNode(state, self)
+            return node.make_node(state, self)
         else:
             return None
 
@@ -49,7 +51,7 @@ class Move_Blank_right(Move_Blank_left):
         if yy < y_size:
             state = np.copy(node.get_current_state())
             state[x,y], state[x,yy] = state[x,yy], state[x,y]
-            return Node.AStarNode(state, self)
+            return node.make_node(state, self)
         else:
             return None
 
@@ -69,7 +71,7 @@ class Move_Blank_up(Move_Blank_left):
         if xx >= 0:
             state = np.copy(node.get_current_state())
             state[x,y], state[xx, y] = state[xx, y], state[x, y]
-            return Node.AStarNode(state, self)
+            return node.make_node(state, self)
         else:
             return None
 
@@ -89,6 +91,6 @@ class Move_Blank_down(Move_Blank_left):
         if xx < x_size:
             state = np.copy(node.get_current_state())
             state[x,y], state[xx, y] = state[xx, y], state[x, y]
-            return Node.AStarNode(state, self)
+            return node.make_node(state, self)
         else:
             return None

@@ -11,9 +11,7 @@ class AStarContext(AbstractContext):
         self.h = h
 
         # f(n) = g(n) + h(n)
-        def f(n):
-            return g(n)+h(n)
-        self.sort_method = f
+        self.sort_method = lambda n: n.estimate_cost
 
         self.expand_counts = 0
         self.maximum_size_of_queue = 0
@@ -25,7 +23,8 @@ class AStarContext(AbstractContext):
         def queue_function(state):
             # because we have to keep maximum number of nodes in the queue
             # so we need to keep a reference of queue here
-            self.queue_reference = AStarQueue(self.node(state), self.sort_method)
+            initial_node = self.node(state, [], self.h(state), 0, self.h)
+            self.queue_reference = AStarQueue(initial_node, self.sort_method)
             return self.queue_reference
         return queue_function
 
@@ -44,9 +43,9 @@ class AStarContext(AbstractContext):
 
         print(
             'The best state to expand with a g(n) = ',
-            str(self.g(node)),
+            str(node.cumulative_cost),
             ' and h(n) = ',
-            str(self.h(node)),
+            str(node.estimate_distance),
             ' is ...\n',
             str(node.get_current_state()),
             'Expanding this node...\n'

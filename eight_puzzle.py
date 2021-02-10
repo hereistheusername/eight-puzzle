@@ -70,11 +70,11 @@ default_puzzle = np.array([[1,2,3],
 
 goal_state = np.roll(np.arange(9), -1).reshape(3,3)
 
-def misplaced_distance(node):
-    return utils.misplaced_distance(node.get_current_state(), goal_state)
+def misplaced_distance(state):
+    return utils.misplaced_distance(state, goal_state)
 
-def manhattan_distance(node):
-    return utils.manhattan_distance(node.get_current_state(), goal_state)
+def manhattan_distance(state):
+    return utils.manhattan_distance(state, goal_state)
 
 def do_search(context):
         start_time = time.process_time()

@@ -6,41 +6,43 @@ from Astar.Operators import Move_Blank_left,Move_Blank_right,Move_Blank_up,Move_
 class AStarNodeTestCase(unittest.TestCase):
     @classmethod
     def setUpClass(self):
+        h = lambda n: 0
+        g = lambda n: n.cumulative_cost
         self.move_left = Move_Blank_left('Move_Blank_left', 1)
         self.move_right = Move_Blank_right('Move_Blank_right', 1)
         self.move_up = Move_Blank_up('Move_Blank_up', 1)
         self.move_down = Move_Blank_down('Move_Blank_down', 1)
         self.case1 = AStarNode(np.array([[1,2,3],
                                         [4,0,6],
-                                        [7,5,8]]))
+                                        [7,5,8]]), [], 0, 0, h)
         self.case2 = AStarNode(np.array([[1,2,3],
                                         [4,8,0],
-                                        [7,6,5]]))
+                                        [7,6,5]]), [], 0, 0, h)
         self.operators = [self.move_left, self.move_right, self.move_up, self.move_down]
         self.case1_expected = [
             AStarNode(np.array([[1,2,3],
                     [0,4,6],
-                    [7,5,8]])),
+                    [7,5,8]]), [], 0, 0, h),
             AStarNode(np.array([[1,2,3],
                     [4,6,0],
-                    [7,5,8]])),
+                    [7,5,8]]), [], 0, 0, h),
             AStarNode(np.array([[1,0,3],
                     [4,2,6],
-                    [7,5,8]])),
+                    [7,5,8]]), [], 0, 0, h),
             AStarNode(np.array([[1,2,3],
                     [4,5,6],
-                    [7,0,8]]))
+                    [7,0,8]]), [], 0, 0, h)
         ]
         self.case2_expected = [
             AStarNode(np.array([[1,2,3],
                     [4,0,8],
-                    [7,6,5]])),
+                    [7,6,5]]), [], 0, 0, h),
             AStarNode(np.array([[1,2,0],
                     [4,8,3],
-                    [7,6,5]])),
+                    [7,6,5]]), [], 0, 0, h),
             AStarNode(np.array([[1,2,3],
                     [4,8,5],
-                    [7,6,0]]))
+                    [7,6,0]]), [], 0, 0, h)
         ]
 
     def test_getters(self):
